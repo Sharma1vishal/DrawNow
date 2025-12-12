@@ -1,0 +1,177 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+}
+
+body{
+    width: 100%;
+    height: 100%;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.main{
+    width: 100%;
+    height: 100%;
+
+}
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .5rem 1rem 0.5rem 1rem ;
+    margin: 1rem;
+    border-radius: 7px;
+    box-shadow: 0 2px 20px 4px whitesmoke;
+}
+
+.logo{
+    font-family:cursive;
+}
+
+.controltool{
+    display: flex;
+    gap: 1.3rem;
+    list-style: none;
+    font-weight: 100;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(72, 72, 72, 0.897);
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(253, 245, 245, 0.933);
+    padding: 0.2rem .5rem;
+    border-radius: 11px;
+}
+
+.controltool{
+    cursor: pointer;
+}
+
+.controltool li:nth-child(3){
+    font-size: 22px;
+    font-weight: 600;
+    color: rgba(203, 199, 199, 0.875);
+    font-family:'Times New Roman', Times, serif;
+}
+
+.impExp{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1.4rem;
+    border-radius: 12px;
+    border: none;
+    background-color: white;
+    box-shadow: 0 0px 1.5px 1.5px rgb(236, 233, 233);
+    cursor: pointer;
+}
+
+.btn i{
+    font-size: 15px;
+    cursor: pointer;
+
+}
+
+.btn label{
+    font-size: 14px;
+    cursor: pointer;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight:600;
+}
+
+.btn:nth-child(1) {
+    transition: transform 0.2s ease-in-out;
+}
+
+.btn:nth-child(2){
+    background-color: rgba(70, 185, 238, 0.836);
+    box-shadow: none;
+    color: white;
+    transition: transform 0.2s ease-in-out;
+}
+
+.btn:hover {
+    transform: translatey(-5px);
+    box-shadow: 0 0px 3px 2px rgb(180, 238, 255);
+}
+
+
+.workingPage{
+    display: flex;
+}
+
+.left{
+    background-color: white;
+    box-shadow: 0 0px 5px 2px rgb(236, 233, 233);
+    margin: 1rem;
+    padding: 0.5rem 0.15rem;
+    border-radius: 0.4rem;
+
+}
+
+.left ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    font-size: 22px;
+    font-weight: 600;
+    font-family: cursive;
+    gap: 1rem;
+}
+
+.left li{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: calc(90%);
+    height: 2.5rem;
+    padding: 0.2rem 0.9rem;
+    justify-content: center;
+
+}
+
+.left li i{
+    display: flex;
+    align-items: center;
+    height: fit-content;
+    justify-content: center;
+}
+
+
+.left ul li:hover{
+    background-color: rgba(230, 233, 237, 0.611);
+    border-radius: 0.3rem;
+    /* color: rgba(174, 213, 244, 0.741); */
+}
+
+/* .left ul i:active li:active{
+    background-color: rgba(209, 227, 254, 0.577);
+    border-radius: 0.3rem;
+    color: rgba(14, 118, 198, 0.741);
+} */
+
+.left li.active {
+  background-color: rgba(209, 227, 254, 0.577);
+  border-radius: 0.3rem;
+  color: rgba(14, 118, 198, 0.741);
+}
+
+
+.uniq{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+.arr{
+    rotate: calc(45deg);
+}
