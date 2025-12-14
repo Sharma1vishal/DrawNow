@@ -47,10 +47,11 @@
             <li><i class="fa-solid fa-fill-drip"></i></li>
             <li class="uniq"><i>T</i></li>
             <li><i class="fa-solid fa-eraser"></i></li>
-            <li></li>
           </ul>
         </div>
-        <div class="centerCanvas"></div>
+        <div class="centerCanvas">
+          <canvas></canvas>
+        </div>
         <div class="right">
           <div class="colStrokeOpac">
             <div class="clrBox">
@@ -61,8 +62,8 @@
                 </ul>
                 <div class="custClr">
                   <h5 class="clrHead">Custom:</h5>
-                  <div class="custClrSelect"></div>
-                  <h6 class="clrHead">ClrVal</h6>
+                    <input type="color" class="custClrSelect"></input>
+                  <h6 class="clrHead custColor">#000000</h6>
                 </div>
               </div>
               <div class="strk">
@@ -71,6 +72,11 @@
                   <ul>
                     <!-- <li></li> -->
                   </ul>
+                  <div class="custClr">
+                    <h5 class="clrHead">Custom:</h5>
+                    <input type="range" name="volume" min="4" max="84" value="4" class="custwdthSelect"></input>
+                    <h5 class="clrHead custwdthVal">4</h5>
+                  </div>
                 </div>
               </div>
             </div>
@@ -80,5 +86,5 @@
       </div>
     </div>
   </body>
-  <script src="drawNow.js"></script>
+  <script src="drawNowUI.js"></script>
 </html>
