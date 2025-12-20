@@ -1,20 +1,12 @@
 // canvas.js
-// RESPONSIBILITY:
-// - Setup canvas
-// - Handle drawing logic
-// - Read from state
-// - NO UI buttons, NO DOM styling logic
+// Handles all canvas drawing logic
 
 import { state } from "./state.js";
+import { saveToHistory } from "./history.js";
 
-let canvas;
-let ctx;
-let lastX = 0;
-let lastY = 0;
-
-/* ===============================
-   INITIALIZATION
-================================ */
+let canvas, ctx;
+let lastX = 0,
+  lastY = 0;
 
 export function initCanvas() {
   canvas = document.querySelector("#canvas");
@@ -23,22 +15,19 @@ export function initCanvas() {
   resizeCanvas();
   window.addEventListener("resize", resizeCanvas);
 
-  // Mouse events
   canvas.addEventListener("mousedown", startDraw);
   canvas.addEventListener("mousemove", draw);
   canvas.addEventListener("mouseup", stopDraw);
   canvas.addEventListener("mouseleave", stopDraw);
 
-  // Touch events (mobile ready)
   canvas.addEventListener("touchstart", startDraw);
   canvas.addEventListener("touchmove", draw);
   canvas.addEventListener("touchend", stopDraw);
 }
 
 /* ===============================
-   CANVAS SIZE HANDLING
+   RESIZE HANDLING
 ================================ */
-
 function resizeCanvas() {
   const rect = canvas.getBoundingClientRect();
   const dpr = window.devicePixelRatio || 1;
@@ -50,17 +39,17 @@ function resizeCanvas() {
 }
 
 /* ===============================
-   DRAWING HANDLERS
+   DRAW FLOW
 ================================ */
-
 function startDraw(e) {
   e.preventDefault();
-
   state.isDrawing = true;
 
-  const { x, y } = getPointerPosition(e);
-  lastX = x;
-  lastY = y;
+  saveToHistory(canvas); // save state for undo
+
+  const pos = getPos(e);
+  lastX = pos.x;
+  lastY = pos.y;
 
   ctx.beginPath();
   ctx.moveTo(lastX, lastY);
@@ -70,9 +59,8 @@ function draw(e) {
   if (!state.isDrawing) return;
   e.preventDefault();
 
-  const { x, y } = getPointerPosition(e);
+  const pos = getPos(e);
 
-  // Tool-based behavior
   if (state.tool === "eraser") {
     ctx.globalCompositeOperation = "destination-out";
     ctx.lineWidth = state.width * 2;
@@ -85,28 +73,24 @@ function draw(e) {
   ctx.lineCap = "round";
   ctx.lineJoin = "round";
 
-  ctx.lineTo(x, y);
+  ctx.lineTo(pos.x, pos.y);
   ctx.stroke();
 
-  lastX = x;
-  lastY = y;
+  lastX = pos.x;
+  lastY = pos.y;
 }
 
 function stopDraw() {
-  if (!state.isDrawing) return;
   state.isDrawing = false;
-
   ctx.closePath();
 }
 
 /* ===============================
    POINTER NORMALIZATION
 ================================ */
-
-function getPointerPosition(e) {
+function getPos(e) {
   const rect = canvas.getBoundingClientRect();
 
-  // Touch support
   if (e.touches && e.touches[0]) {
     return {
       x: e.touches[0].clientX - rect.left,
@@ -114,14 +98,12 @@ function getPointerPosition(e) {
     };
   }
 
-  // Mouse
-  return {
-    x: e.offsetX,
-    y: e.offsetY,
-  };
+  return { x: e.offsetX, y: e.offsetY };
 }
 
-// Clear canvas (used by trash button later)
+/* ===============================
+   PUBLIC HELPERS
+================================ */
 export function clearCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
