@@ -1,4 +1,5 @@
 import { state } from "./state.js";
+import { undo, redo } from "./history.js";
 
 const leftLiTools = document.querySelectorAll(".left ul li");
 const clors = document.querySelector(".diffClr");
@@ -7,17 +8,34 @@ const cusColor = document.querySelector(".custClrSelect");
 const custColorVal = document.querySelector(".custColor");
 const custwdthSelect = document.querySelector(".custwdthSelect");
 const custwdthVal = document.querySelector(".custwdthVal");
+const undoBtn = document.querySelector("#undo");
+const redoBtn = document.querySelector("#redo");
 
-export function initUI(callbacks = {}) {
+export function initUI(callbacks = {}, canvas) {
   leftLiTools.forEach((li) => {
     li.addEventListener("click", () => {
       leftLiTools.forEach((item) => {
         item.classList.remove("active");
       });
+      li.dataset.tool = li.firstChild.id;
 
       li.classList.add("active");
-      state.tool = li.dataset.tool;
+      state.tool = li.firstChild.id;
+      onToolChange();
     });
+  });
+
+  if (!canvas) {
+    console.error("Canvas not passed to UI");
+    return;
+  }
+
+  undoBtn.addEventListener("click", () => {
+    undo(canvas);
+  });
+
+  redoBtn.addEventListener("click", () => {
+    redo(canvas);
   });
 
   function colorMaker() {
@@ -58,6 +76,8 @@ export function initUI(callbacks = {}) {
 
   cusColor.addEventListener("input", (e) => {
     custColorVal.textContent = e.target.value;
+    state.color = `${e.target.value}`;
+
     updateSliderFill(custColorVal.textContent);
     anmtClrClass();
   });
@@ -66,7 +86,6 @@ export function initUI(callbacks = {}) {
     custwdthVal.textContent = `${e.target.value}px`;
     updateSliderFill(state.color);
     state.width = e.target.value;
-    console.log(e.target.value);
     widthActiveClass();
 
     // var value = Math.ceil(
@@ -74,7 +93,6 @@ export function initUI(callbacks = {}) {
     // );
     // let rangeValColor = custColorVal.textContent;
     // custwdthSelect.style.background = `linear-gradient(to right, ${rangeValColor} 0%, ${rangeValColor} ${value}%, #fff ${value}%)`;
-    // console.log(value);
   });
 
   function updateSliderFill(selectedClr) {
@@ -88,18 +106,6 @@ export function initUI(callbacks = {}) {
     custwdthSelect.style.acc;
     custwdthSelect.style.background = `linear-gradient(to right, ${color} 0%, ${color} ${value}%, #fff ${value}%)`;
   }
-
-  // function widthMaker() {
-  //   for (let i = 4; i <= 36; i = i * 1.5) {
-  //     const li = document.createElement("li");
-  //     // li.textContent = ".";
-  //     li.style.width = `${i}px`;
-  //     li.style.height = `${i}px`;
-  //     li.style.backgroundColor = "rgba(128, 128, 128, 0.722)";
-  //     li.style.borderRadius = "50%";
-  //     widths.append(li);
-  //   }
-  // }
 
   function widthActiveClass() {
     widths
@@ -133,9 +139,9 @@ export function initUI(callbacks = {}) {
   // Handles all UI interactions (buttons, colors, widths)
 
   // export function initUI(callbacks = {}) {
-  const { onClear } = callbacks;
+  const { onClear, onToolChange } = callbacks;
 
-  // Example: Clear button
+  //Clear button
   const clearBtn = document.querySelector(".delete");
 
   if (clearBtn && onClear) {
@@ -145,8 +151,8 @@ export function initUI(callbacks = {}) {
   }
 
   /* ===============================
-     TOOL SELECTION
-  ================================ */
+    TOOL SELECTION
+    ================================ */
 
   // const tools = document.querySelectorAll(".left li");
   // tools.forEach((tool) => {
@@ -154,7 +160,6 @@ export function initUI(callbacks = {}) {
   //     tools.forEach((t) => t.classList.remove("active"));
   //     tool.classList.add("active");
 
-  //     // Update global state
   //     state.tool = tool.dataset.tool;
   //     console.log(tool.dataset);
   //   });
@@ -163,22 +168,8 @@ export function initUI(callbacks = {}) {
   /* ===============================
      COLOR SELECTION
   ================================ */
-  // const colorInput = document.querySelector(".custClrSelect");
-  // if (colorInput) {
-  //   colorInput.addEventListener("input", (e) => {
-  //     state.color = e.target.value;
-  //   });
-  // }
 
   /* ===============================
      WIDTH SELECTION
-  ================================ */
-  // const widths = document.querySelectorAll(".widths li");
-  // widths.forEach((w) => {
-  //   w.addEventListener("click", () => {
-  //     widths.forEach((i) => i.classList.remove("active"));
-  //     w.classList.add("active");
-
-  //   });
-  // });
+     ================================ */
 }

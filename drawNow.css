@@ -66,6 +66,10 @@ li{
     font-family:'Times New Roman', Times, serif;
 }
 
+.controltool li:nth-child(3):active  {
+    background-color: #82CFD0;
+}
+
 .impExp{
     display: flex;
     align-items: center;
@@ -208,7 +212,7 @@ li{
 
   background: radial-gradient();
   border-radius: 8px;
-  height: 100% ;
+  /* height: 100% ; */
   /* margin-bottom: 2rem; */
   box-shadow: 0 1px 25px 0px rgba(108, 151, 245, 0.344);
 
@@ -230,10 +234,39 @@ li{
   border-radius: 6px;
   /* overflow: hidden; */
 
-  cursor: crosshair;           /* Drawing cursor */
   touch-action: none;          /* IMPORTANT for mobile drawing */
   display: block;
 }
+
+canvas{
+      /* border: 2px solid red; */
+  position: relative;
+  z-index: 10;
+}
+
+
+.cursor-pencil {
+  cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiI+PGxpbmUgeDE9IjQiIHkxPSIyOCIgeDI9IjI4IiB5Mj0iNCIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIzIi8+PHBvbHlnb24gcG9pbnRzPSIyNiwyIDMwLDYgMjQsOCIgc3R5bGU9ImZpbGw6YmxhY2siLz48L3N2Zz4=") 4 28, crosshair;
+}
+
+.cursor-eraser {
+  cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiI+PHJlY3QgeD0iNiIgeT0iMTAiIHdpZHRoPSIyMCIgaGVpZ2h0PSIxMiIgcng9IjMiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PC9zdmc+") 16 16, cell;
+}
+
+
+.cursor-shape {
+  cursor: crosshair;
+}
+
+.cursor-pan {
+  cursor: grab;
+}
+
+.cursor-pan:active {
+  cursor: grabbing;
+}
+
+
 
 
 
@@ -300,7 +333,7 @@ li{
 .custClr{
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.4rem;
     margin: 0.7rem;
     margin-left: 0.0rem;
     flex-wrap: wrap;

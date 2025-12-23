@@ -5,5 +5,6 @@ export const state = {
   tool: "pencil", // pencil | eraser
   color: "#000000", // selected color
   width: 4, // stroke width
+  cursor: "pointer",
   isDrawing: false, // internal flag (used by canvas)
 };

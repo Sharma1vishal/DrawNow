@@ -9,6 +9,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css"
+    />
+
   </head>
   <body>
     <div class="main">
@@ -17,10 +21,10 @@
         <div class="urd">
           <ul class="controltool">
             <li>
-              <i class="fa-solid fa-rotate-left"></i>
+              <i class="fa-solid fa-rotate-left" id="undo"></i>
             </li>
             <li>
-              <i class="fa-solid fa-arrow-rotate-right"></i>
+              <i class="fa-solid fa-arrow-rotate-right" id="redo"></i>
             </li>
             <li>|</li>
             <li><i class="fa-regular fa-trash-can delete"></i></li>
@@ -37,16 +41,18 @@
       </div>
       <div class="workingPage">
         <div class="left">
-          <ul>
-            <li><i class="fa-solid fa-hand"></i></li>
-            <li><i class="fa-solid fa-pencil"></i></li>
-            <li><i>/</i></li>
-            <li><i class="fa-regular fa-square-full"></i></li>
-            <li><i class="fa-regular fa-circle"></i></li>
-            <li><i class="fa-solid fa-arrow-up uniq arr"></i></li>
-            <li><i class="fa-solid fa-fill-drip"></i></li>
-            <li class="uniq"><i>T</i></li>
-            <li><i class="fa-solid fa-eraser"></i></li>
+          <ul id="tools">
+            <li><i class="fa-solid fa-eraser" id="eraser"></i></li>
+            <!-- <li><i class="fa-solid fa-hand" id="hand"></i></li> -->
+            <li class="active"><i class="fa-solid fa-pencil" id="pencil"></i></li>
+            <li><i id="line">/</i></li>
+            <li><i class="fa-regular fa-square-full" id="square"></i></li>
+            <li><i class="bi bi-triangle" id="triangle"></i></li>
+            <li><i class="fa-regular fa-circle" id="circle"></i></li>
+            <li><i class="fa-solid fa-arrow-up uniq arr" id="arrow"></i></li>
+            <!-- <li><i class="fa-solid fa-fill-drip" id="fill-color"></i></li>
+            <li class="uniq" id="textT"><i>T</i></li> -->
+            
           </ul>
         </div>
         <div class="centerCanvas">
@@ -55,7 +61,7 @@
         <div class="right">
           <div class="colStrokeOpac">
             <div class="clrBox">
-              <h4 class="clrHead">STROKE COLOR</h4>
+              <h4 class="clrHead"> COLOR for All</h4>
               <div class="clrs">
                 <ul class="diffClr">
                   <!-- <li></li> -->
@@ -67,7 +73,7 @@
                 </div>
               </div>
               <div class="strk">
-                <h4 class="clrHead">STROKE WIDTH</h4>
+                <h4 class="clrHead">WIDTH for All</h4>
                 <div class="widths">
                   <ul>
                     <!-- <li></li> -->
