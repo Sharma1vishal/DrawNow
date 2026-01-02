@@ -272,3 +272,15 @@ export function changeCursor() {
 export function getCanvas() {
   return canvas;
 }
+
+export function saveImage() {
+  // Getting the canvas
+  var canvas = document.getElementById("canvas");
+  // Converting the canvas to data
+  var image = canvas.toDataURL();
+  // Create a link
+  var aDownloadLink = document.createElement("a");
+  aDownloadLink.download = "canvas_image.png";
+  aDownloadLink.href = image;
+  aDownloadLink.click();
+}

@@ -2,7 +2,13 @@
 // Entry point of the DrawNow app
 
 import { initUI } from "./drawNowUI.js";
-import { initCanvas, clearCanvas, changeCursor, getCanvas } from "./canvas.js";
+import {
+  initCanvas,
+  clearCanvas,
+  changeCursor,
+  getCanvas,
+  saveImage,
+} from "./canvas.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   // initUI();
@@ -12,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       onClear: clearCanvas,
       onToolChange: changeCursor,
+      onExport: saveImage,
     },
     canvas
   );

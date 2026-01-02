@@ -139,7 +139,7 @@ export function initUI(callbacks = {}, canvas) {
   // Handles all UI interactions (buttons, colors, widths)
 
   // export function initUI(callbacks = {}) {
-  const { onClear, onToolChange } = callbacks;
+  const { onClear, onToolChange, onExport } = callbacks;
 
   //Clear button
   const clearBtn = document.querySelector(".delete");
@@ -147,6 +147,14 @@ export function initUI(callbacks = {}, canvas) {
   if (clearBtn && onClear) {
     clearBtn.addEventListener("click", () => {
       onClear(); // UI does NOT know what this does
+    });
+  }
+
+  const exportBtn = document.querySelector("#export");
+
+  if (exportBtn && onExport) {
+    exportBtn.addEventListener("click", () => {
+      onExport();
     });
   }
 
